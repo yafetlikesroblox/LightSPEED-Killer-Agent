@@ -1,0 +1,38 @@
+data:text/html;charset=utf-8,<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LightSPED Killer Agent</title>
+  <link rel="shortcut icon" type="image/png" href="https://raw.githubusercontent.com/Blobby-Boi/LightSPED-Killer-Agent/refs/heads/main/lightspeed.png">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      background-color: #1e1f22;
+    }
+  </style>
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const main = "https://raw.githubusercontent.com/Blobby-Boi/LightSPED-Killer-Agent/refs/heads/main/index.html";
+      const fallback = "https://cdn.jsdelivr.net/gh/Blobby-Boi/LightSPED-Killer-Agent/index.html";
+
+      fetch(main)
+        .then(response => {
+          if (!response.ok) throw new Error("Main URL failed");
+          return response.text();
+        })
+        .catch(() => {
+          return fetch(fallback).then(response => {
+            if (!response.ok) throw new Error("Fallback URL failed");
+            return response.text();
+          });
+        })
+        .then(html => {
+          document.open();
+          document.write(html);
+          document.close();
+        });
+    });
+  </script>
+</head>
+</html>
